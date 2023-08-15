@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose")
-const {MDulr} = require("./keys")
+// const {MDulr} = require("./keys")
+const dotenv = require("dotenv");
+dotenv.config();
 const cors = require("cors")
 const PORT = process.env.port|| 5000;
 const path = require("path")
@@ -18,7 +20,7 @@ app.use(require("./routes/user"))
 
 
 
-mongoose.connect(MDulr);
+mongoose.connect(process.env.DATABASE_URI);
 
 mongoose.connection.on("connected",()=>{
     console.log("mongodb connected ");

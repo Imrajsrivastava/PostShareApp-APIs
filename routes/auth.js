@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const USER = mongoose.model("USER");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const {jwt_secret} = require("../keys");
+// const {jwt_secret} = require("../keys");
+const dotenv = require("dotenv");
+dotenv.config();
 
 
 
@@ -67,7 +69,7 @@ router.post("/signin", (req, res) => {
       .then((match) => {
         if (match) {
           // return res.status(200).json({ message: "Signed in Successfully" });
-          const token = jwt.sign({_id: userlog.id}, jwt_secret);
+          const token = jwt.sign({_id: userlog.id}, process.env.JWT_KEY);
 
           console.log(token);
           // console.log(userlog.id);
